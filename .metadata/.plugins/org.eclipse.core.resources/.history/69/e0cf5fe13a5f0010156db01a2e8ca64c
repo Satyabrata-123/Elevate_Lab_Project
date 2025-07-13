@@ -1,0 +1,5 @@
+package com.jobPortal.config;
+
+public class SecurityConfig {
+
+}

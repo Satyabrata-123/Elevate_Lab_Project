@@ -1,0 +1,38 @@
+package com.jobPortal.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf().disable() // Disable CSRF for APIs (safe for non-browser clients)
+            .authorizeHttpRequests(auth -> auth
+
+                // Public APIs - no authentication required
+                .requestMatchers(
+                    "/api/User/users",                      // Register user
+                    "/api/Job/jobs",                        // List all jobs
+                    "/api/Job/jobs/{id}",                   // View job by ID
+                    "/api/Job/jobs/employer/{username}"      // View jobs by employer
+                ).permitAll()
+
+                // Authenticated APIs
+                .requestMatchers(
+                    "/api/Job/jobs",                        // POST job (protected)
+                    "/api/Application/**"                   // Apply to job, view applications
+                ).authenticated()
+
+                // Any other endpoints require authentication
+                .anyRequest().authenticated()
+            )
+            .httpBasic(); // Use Basic Auth (for now)
+
+        return http.build();
+    }
+}

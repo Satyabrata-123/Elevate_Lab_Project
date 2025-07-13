@@ -1,0 +1,29 @@
+package com.jobPortal.service.impl;
+
+import java.util.List;
+
+import com.jobPortal.entity.Application;
+import com.jobPortal.entity.Job;
+import com.jobPortal.entity.User;
+import com.jobPortal.service.ApplicationService;
+
+public class ApplicationServiceImpl implements ApplicationService {
+
+	@Override
+	public Application save(Application application) {
+		return 
+	}
+
+	@Override
+	public List<Application> findByApplicant(User applicant) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Application> findByJob(Job job) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
